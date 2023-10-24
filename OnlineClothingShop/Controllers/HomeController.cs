@@ -17,7 +17,7 @@ namespace OnlineClothingShop.Controllers
         {
             return View();
         }
-
+            
         public IActionResult Privacy()
         {
             return View();
