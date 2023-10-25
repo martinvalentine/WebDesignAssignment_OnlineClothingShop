@@ -17,8 +17,6 @@ namespace OnlineClothingShop.Models
         }
 
         public virtual DbSet<TbAccount> TbAccounts { get; set; } = null!;
-        public virtual DbSet<TbAttribute> TbAttributes { get; set; } = null!;
-        public virtual DbSet<TbAttributesPrice> TbAttributesPrices { get; set; } = null!;
         public virtual DbSet<TbCategory> TbCategories { get; set; } = null!;
         public virtual DbSet<TbCustomer> TbCustomers { get; set; } = null!;
         public virtual DbSet<TbLocation> TbLocations { get; set; } = null!;
@@ -32,7 +30,6 @@ namespace OnlineClothingShop.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Data Source=(local);Initial Catalog = OnlineClothingShop; Persist Security Info=True;User ID=sa; Password = Qu@ng2003;");
             }
         }
@@ -73,40 +70,6 @@ namespace OnlineClothingShop.Models
                     .HasConstraintName("FK_tb_Accounts_tb_Roles");
             });
 
-            modelBuilder.Entity<TbAttribute>(entity =>
-            {
-                entity.HasKey(e => e.AttributeId);
-
-                entity.ToTable("tb_Attributes");
-
-                entity.Property(e => e.AttributeId).HasColumnName("AttributeID");
-
-                entity.Property(e => e.Name).HasMaxLength(255);
-            });
-
-            modelBuilder.Entity<TbAttributesPrice>(entity =>
-            {
-                entity.HasKey(e => e.AttributesPriceId);
-
-                entity.ToTable("tb_AttributesPrices");
-
-                entity.Property(e => e.AttributesPriceId).HasColumnName("AttributesPriceID");
-
-                entity.Property(e => e.AttributeId).HasColumnName("AttributeID");
-
-                entity.Property(e => e.ProductId).HasColumnName("ProductID");
-
-                entity.HasOne(d => d.Attribute)
-                    .WithMany(p => p.TbAttributesPrices)
-                    .HasForeignKey(d => d.AttributeId)
-                    .HasConstraintName("FK_tb_AttributesPrices_tb_Attributes");
-
-                entity.HasOne(d => d.Product)
-                    .WithMany(p => p.TbAttributesPrices)
-                    .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK_tb_AttributesPrices_tb_Products");
-            });
-
             modelBuilder.Entity<TbCategory>(entity =>
             {
                 entity.HasKey(e => e.CatId);
@@ -117,13 +80,7 @@ namespace OnlineClothingShop.Models
 
                 entity.Property(e => e.CatName).HasMaxLength(250);
 
-                entity.Property(e => e.Cover).HasMaxLength(250);
-
-                entity.Property(e => e.ParentId).HasColumnName("ParentID");
-
                 entity.Property(e => e.Thumb).HasMaxLength(250);
-
-                entity.Property(e => e.Title).HasMaxLength(250);
             });
 
             modelBuilder.Entity<TbCustomer>(entity =>
@@ -245,7 +202,8 @@ namespace OnlineClothingShop.Models
 
             modelBuilder.Entity<TbProduct>(entity =>
             {
-                entity.HasKey(e => e.ProductId);
+                entity.HasKey(e => e.ProductId)
+                    .HasName("PK_tb_Products_1");
 
                 entity.ToTable("tb_Products");
 
@@ -257,11 +215,15 @@ namespace OnlineClothingShop.Models
 
                 entity.Property(e => e.DateModified).HasColumnType("datetime");
 
+                entity.Property(e => e.DescImg).HasMaxLength(255);
+
                 entity.Property(e => e.ProductName).HasMaxLength(255);
 
                 entity.Property(e => e.ShortDesc).HasMaxLength(255);
 
-                entity.Property(e => e.Thumb).HasMaxLength(255);
+                entity.Property(e => e.SingleImg).HasMaxLength(255);
+
+                entity.Property(e => e.ThumbImg).HasMaxLength(255);
 
                 entity.HasOne(d => d.Cat)
                     .WithMany(p => p.TbProducts)

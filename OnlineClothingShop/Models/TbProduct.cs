@@ -7,7 +7,6 @@ namespace OnlineClothingShop.Models
     {
         public TbProduct()
         {
-            TbAttributesPrices = new HashSet<TbAttributesPrice>();
             TbOrderDetails = new HashSet<TbOrderDetail>();
         }
 
@@ -17,8 +16,11 @@ namespace OnlineClothingShop.Models
         public string? Description { get; set; }
         public int? CatId { get; set; }
         public int? Price { get; set; }
+        public int? Size { get; set; }
         public int? Discount { get; set; }
-        public string? Thumb { get; set; }
+        public string? ThumbImg { get; set; }
+        public string? SingleImg { get; set; }
+        public string? DescImg { get; set; }
         public DateTime? DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
         public bool? BestSellers { get; set; }
@@ -27,7 +29,6 @@ namespace OnlineClothingShop.Models
         public int? UnitsInStock { get; set; }
 
         public virtual TbCategory? Cat { get; set; }
-        public virtual ICollection<TbAttributesPrice> TbAttributesPrices { get; set; }
         public virtual ICollection<TbOrderDetail> TbOrderDetails { get; set; }
     }
 }

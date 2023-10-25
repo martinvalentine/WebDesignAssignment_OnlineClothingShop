@@ -132,9 +132,8 @@ h3{font-size: 28px;}
 h4{font-size: 24px;}
 h5{font-size: 16px;}
 h6{font-size: 14px;}
-h1, h2, h3, h4, h5, h6
-{
-	color: #282828;
+h1, h2, h3, h4, h5, h6 {
+	color: #f8f9fa;
 	-webkit-font-smoothing: antialiased;
 	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
 	text-shadow: rgba(0,0,0,.01) 0 0 1px;
