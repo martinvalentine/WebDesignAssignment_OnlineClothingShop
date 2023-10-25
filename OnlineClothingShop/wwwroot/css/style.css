@@ -212,7 +212,7 @@ h2 {
 
 .main {
     background: #f8f8f8;
-    padding: 150px 0;
+    padding: 140px 0;
 }
 
 .clear {
@@ -281,9 +281,6 @@ body {
     -ms-transform: translate(-50%, -50%);
 }
 
-.signup {
-    margin-bottom: 150px;
-}
 
 .signup-content {
     padding: 75px 0;
