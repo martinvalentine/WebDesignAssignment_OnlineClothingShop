@@ -16,7 +16,6 @@ namespace OnlineClothingShop.Models
         public string? Description { get; set; }
         public int? CatId { get; set; }
         public int? Price { get; set; }
-        public int? Size { get; set; }
         public int? Discount { get; set; }
         public string? ThumbImg { get; set; }
         public string? SingleImg { get; set; }
