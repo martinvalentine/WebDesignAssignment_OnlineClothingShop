@@ -6,6 +6,8 @@
 
 <head>
 
+	<link rel="stylesheet" type="text/css" href="~/css/main_styles.css">
+	<link rel="stylesheet" type="text/css" href="~/css/responsive.css">
 	<title>÷ Shop</title>
 	<meta name="description" content="÷ Shop">
 </head>
@@ -104,7 +106,7 @@
 											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$@item.Discount%</span></div>
 										}
 										<div class="product_info">
-											<h6 class="product_name"><a href="single.html">@item.ProductName</a></h6>
+											<h6 class="product_name"><a asp-action="Detail" asp-controller="Shop">@item.ProductName</a></h6>
 											@if ((@item.Price - (@item.Price * @item.Discount / 100)) < @item.Price)
 											{
 												<div class="product_price">
