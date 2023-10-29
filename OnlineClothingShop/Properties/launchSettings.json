@@ -1,13 +1,21 @@
-{
+﻿{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:26384",
+      "sslPort": 44333
+    }
+  },
   "profiles": {
     "OnlineClothingShop": {
       "commandName": "Project",
+      "dotnetRunMessages": true,
       "launchBrowser": true,
+      "applicationUrl": "https://localhost:7199;http://localhost:5129",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7295;http://localhost:5252"
+      }
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -15,24 +23,6 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
-    "WSL": {
-      "commandName": "WSL2",
-      "launchBrowser": true,
-      "launchUrl": "https://localhost:7295",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "https://localhost:7295;http://localhost:5252"
-      },
-      "distributionName": ""
-    }
-  },
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:32680",
-      "sslPort": 44367
     }
   }
 }

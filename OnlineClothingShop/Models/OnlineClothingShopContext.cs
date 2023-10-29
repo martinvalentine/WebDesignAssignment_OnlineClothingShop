@@ -30,7 +30,7 @@ namespace OnlineClothingShop.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-HTFNIN8\\SQLEXPRESS;Initial Catalog = OnlineClothingShop;");
+                optionsBuilder.UseSqlServer("Data Source=(local);Initial Catalog = OnlineClothingShop; Persist Security Info=True;User ID=sa; Password = Qu@ng2003;");
             }
         }
 
