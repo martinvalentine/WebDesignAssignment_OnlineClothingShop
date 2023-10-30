@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineClothingShop.Models
 {
+    [Table("tb_OrderDetails")]
     public partial class TbOrderDetail
     {
         public int OrderDetailId { get; set; }

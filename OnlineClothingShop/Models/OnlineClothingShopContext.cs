@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace OnlineClothingShop.Models
 {
-    public partial class OnlineClothingShopContext : DbContext
+    public partial class OnlineClothingShopContext : IdentityDbContext
     {
         public OnlineClothingShopContext()
         {
@@ -15,60 +16,25 @@ namespace OnlineClothingShop.Models
             : base(options)
         {
         }
-
-        public virtual DbSet<TbAccount> TbAccounts { get; set; } = null!;
         public virtual DbSet<TbCategory> TbCategories { get; set; } = null!;
         public virtual DbSet<TbCustomer> TbCustomers { get; set; } = null!;
-        public virtual DbSet<TbLocation> TbLocations { get; set; } = null!;
         public virtual DbSet<TbOrder> TbOrders { get; set; } = null!;
         public virtual DbSet<TbOrderDetail> TbOrderDetails { get; set; } = null!;
         public virtual DbSet<TbProduct> TbProducts { get; set; } = null!;
-        public virtual DbSet<TbRole> TbRoles { get; set; } = null!;
         public virtual DbSet<TbTransactStatus> TbTransactStatuses { get; set; } = null!;
+
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=(local);Initial Catalog = OnlineClothingShop; Persist Security Info=True;User ID=sa; Password = Qu@ng2003;");
+                optionsBuilder.UseSqlServer("Data Source=(local);Initial Catalog = OnlineClothingShop; Persist Security Info=True;User ID=sa; Password = Ha@123;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TbAccount>(entity =>
-            {
-                entity.HasKey(e => e.AccountId);
-
-                entity.ToTable("tb_Accounts");
-
-                entity.Property(e => e.AccountId).HasColumnName("AccountID");
-
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.Email).HasMaxLength(50);
-
-                entity.Property(e => e.FullName).HasMaxLength(150);
-
-                entity.Property(e => e.LastLogin).HasColumnType("datetime");
-
-                entity.Property(e => e.Password).HasMaxLength(50);
-
-                entity.Property(e => e.Phone)
-                    .HasMaxLength(12)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
-
-                entity.Property(e => e.Salt)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.TbAccounts)
-                    .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK_tb_Accounts_tb_Roles");
-            });
 
             modelBuilder.Entity<TbCategory>(entity =>
             {
@@ -118,30 +84,6 @@ namespace OnlineClothingShop.Models
                 entity.Property(e => e.Salt)
                     .HasMaxLength(8)
                     .IsFixedLength();
-
-                entity.HasOne(d => d.Location)
-                    .WithMany(p => p.TbCustomers)
-                    .HasForeignKey(d => d.LocationId)
-                    .HasConstraintName("FK_tb_Customers_tb_Locations");
-            });
-
-            modelBuilder.Entity<TbLocation>(entity =>
-            {
-                entity.HasKey(e => e.LocationId);
-
-                entity.ToTable("tb_Locations");
-
-                entity.Property(e => e.LocationId).HasColumnName("LocationID");
-
-                entity.Property(e => e.Name).HasMaxLength(100);
-
-                entity.Property(e => e.NameWithType).HasMaxLength(255);
-
-                entity.Property(e => e.PathWithType).HasMaxLength(255);
-
-                entity.Property(e => e.Slug).HasMaxLength(100);
-
-                entity.Property(e => e.Type).HasMaxLength(20);
             });
 
             modelBuilder.Entity<TbOrder>(entity =>
@@ -231,18 +173,6 @@ namespace OnlineClothingShop.Models
                     .HasConstraintName("FK_tb_Products_tb_Categories");
             });
 
-            modelBuilder.Entity<TbRole>(entity =>
-            {
-                entity.HasKey(e => e.RoleId);
-
-                entity.ToTable("tb_Roles");
-
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
-
-                entity.Property(e => e.Description).HasMaxLength(50);
-
-                entity.Property(e => e.RoleName).HasMaxLength(50);
-            });
 
             modelBuilder.Entity<TbTransactStatus>(entity =>
             {
@@ -254,7 +184,7 @@ namespace OnlineClothingShop.Models
 
                 entity.Property(e => e.Status).HasMaxLength(50);
             });
-
+            base.OnModelCreating(modelBuilder);
             OnModelCreatingPartial(modelBuilder);
         }
 

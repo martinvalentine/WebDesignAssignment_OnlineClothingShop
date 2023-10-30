@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineClothingShop.Models
 {
+    [Table("tb_Customers")]
     public partial class TbCustomer
     {
         public TbCustomer()
@@ -25,8 +27,6 @@ namespace OnlineClothingShop.Models
         public string? Salt { get; set; }
         public DateTime? LastLogin { get; set; }
         public bool? Active { get; set; }
-
-        public virtual TbLocation? Location { get; set; }
         public virtual ICollection<TbOrder> TbOrders { get; set; }
     }
 }
