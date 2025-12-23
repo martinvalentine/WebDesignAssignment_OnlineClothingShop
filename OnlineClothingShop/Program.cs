@@ -6,12 +6,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<OnlineClothingShopContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("OnlineClothingShopContext")));
+builder.Services.AddDbContext<OnlineClothingShopContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("OnlineClothingShopContext")));
 builder.Services.AddDefaultIdentity<IdentityUser>(
         options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
      .AddEntityFrameworkStores<OnlineClothingShopContext>();
 var app = builder.Build();
+
+// Create database if it doesn't exist
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<OnlineClothingShopContext>();
+    context.Database.EnsureCreated();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
