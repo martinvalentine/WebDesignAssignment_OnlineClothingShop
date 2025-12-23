@@ -27,10 +27,6 @@ namespace OnlineClothingShop.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Data Source=(local);Initial Catalog = OnlineClothingShop; Persist Security Info=True;User ID=sa; Password = Ha@123;");
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
